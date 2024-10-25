@@ -32,9 +32,9 @@ public class Dijkstra {
         return distances;
       }
 
-      final List<List<Edge>> graph = provider.getGraph();
+      final Graph graph = provider.getGraph();
 
-      for (Edge edge : graph.get(u)) {
+      for (Edge edge : graph.getEdges(u)) {
         int v = edge.targetNode;
         int weight = edge.weight;
 
@@ -50,7 +50,7 @@ public class Dijkstra {
 
 
   private int[] preparedDistanceMatrix(int start) {
-    int vertexCount = provider.vertexCount();
+    int vertexCount = provider.getGraph().vertexCount();
     int[] distances = new int[vertexCount];
     Arrays.fill(distances, Integer.MAX_VALUE);
     distances[start] = 0;
@@ -60,13 +60,13 @@ public class Dijkstra {
 
 
   public static void main(String[] args) throws IOException, URISyntaxException {
-//    String filePath = "src/main/resources/day15-ray.txt";
-    String filePath = "src/main/resources/day15-ray-pt2-ex.txt";
+    String filePath = "src/main/resources/day15-ray.txt";
+//    String filePath = "src/main/resources/day15-ray-pt2-ex.txt";
 
     DataProvider provider = new DataProvider(filePath);
     Dijkstra dijkstra = new Dijkstra(provider);
     int source = 0;
-    int target = provider.vertexCount() - 1;
+    int target = provider.getGraph().vertexCount() - 1;
 
     long startTime = System.nanoTime();
     int[] distances = dijkstra.calculateShortestPath(source, target);

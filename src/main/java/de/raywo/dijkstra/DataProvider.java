@@ -4,25 +4,20 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 
 public class DataProvider {
 
-  private final List<List<Edge>> graph;
+  private final Graph graph;
+
 
   public DataProvider(String filePath) throws IOException, URISyntaxException {
-    graph = buildGraph(readMatrixFromFile(filePath));
+    graph = new Graph(readMatrixFromFile(filePath));
   }
 
 
-  public List<List<Edge>> getGraph() {
+  public Graph getGraph() {
     return graph;
-  }
-
-
-  public int vertexCount() {
-    return graph.size();
   }
 
 
@@ -48,41 +43,5 @@ public class DataProvider {
     }
 
     return map;
-  }
-
-
-  private List<List<Edge>> buildGraph(int[][] matrix) {
-    int rows = matrix.length;
-    int cols = matrix[0].length;
-    int vertexCount = rows * cols;
-
-    List<List<Edge>> graph = new ArrayList<>();
-    for (int i = 0; i < vertexCount; i++) {
-      graph.add(new ArrayList<>());
-    }
-
-    for (int i = 0; i < rows; i++) {
-      for (int j = 0; j < cols; j++) {
-        int node = i * cols + j;
-        if (i > 0) {
-          int targetNode = (i - 1) * cols + j;
-          graph.get(node).add(new Edge(targetNode, matrix[i - 1][j]));
-        }
-        if (i < rows - 1) {
-          int targetNode = (i + 1) * cols + j;
-          graph.get(node).add(new Edge(targetNode, matrix[i + 1][j]));
-        }
-        if (j > 0) {
-          int targetNode = i * cols + (j - 1);
-          graph.get(node).add(new Edge(targetNode, matrix[i][j - 1]));
-        }
-        if (j < cols - 1) {
-          int targetNode = i * cols + (j + 1);
-          graph.get(node).add(new Edge(targetNode, matrix[i][j + 1]));
-        }
-      }
-    }
-
-    return graph;
   }
 }
