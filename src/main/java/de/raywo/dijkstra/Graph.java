@@ -6,10 +6,13 @@ import java.util.List;
 public class Graph {
 
   private final List<List<Edge>> graph;
+  private final int[][] matrix;
+  private Graph derivedGraph = null;
 
 
   public Graph(int[][] matrix) {
     this.graph = buildGraph(matrix);
+    this.matrix = matrix;
   }
 
 
@@ -18,8 +21,56 @@ public class Graph {
   }
 
 
+  public int dimension() {
+    return matrix.length;
+  }
+
+
   public List<Edge> getEdges(int lineNo) {
     return graph.get(lineNo);
+  }
+
+
+  public int[][] getMatrix() {
+    return matrix;
+  }
+
+
+  public Graph getDerivedGraph() {
+    if (derivedGraph != null) return derivedGraph;
+
+    int rows = matrix.length;
+    int cols = matrix[0].length;
+    int[][] result = new int[rows][cols];
+
+    for (int i = 0; i < rows; i++) {
+      for (int j = 0; j < cols; j++) {
+        final int newValue = matrix[i][j] + 1;
+        result[i][j] = newValue <= 9 ? newValue : 1;
+      }
+    }
+
+    this.derivedGraph = new Graph(result);
+
+    return derivedGraph;
+  }
+
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+
+    int cols = matrix[0].length;
+
+    for (int[] row : matrix) {
+      for (int j = 0; j < cols; j++) {
+        sb.append(row[j]);
+      }
+
+      sb.append("\n");
+    }
+
+    return sb.toString();
   }
 
 

@@ -1,25 +1,28 @@
 package de.raywo.dijkstra;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.text.NumberFormat;
 import java.util.Arrays;
-import java.util.List;
 import java.util.PriorityQueue;
 
 public class Dijkstra {
 
-  private final DataProvider provider;
+  private static Dijkstra instance;
 
+  public static Dijkstra getInstance() {
+    if (instance == null) {
+      instance = new Dijkstra();
+    }
 
-  public Dijkstra(DataProvider provider) throws IOException, URISyntaxException {
-    this.provider = provider;
+    return instance;
+  }
+
+  private Dijkstra() {
   }
 
 
-  public int[] calculateShortestPath(int start,
+  public int[] calculateShortestPath(Graph graph,
+                                     int start,
                                      int target) {
-    final int[] distances = preparedDistanceMatrix(start);
+    final int[] distances = preparedDistanceMatrix(graph, start);
 
     PriorityQueue<Node> pq = new PriorityQueue<>();
     pq.add(new Node(start, 0));
@@ -31,8 +34,6 @@ public class Dijkstra {
       if (u == target) {
         return distances;
       }
-
-      final Graph graph = provider.getGraph();
 
       for (Edge edge : graph.getEdges(u)) {
         int v = edge.targetNode;
@@ -49,8 +50,8 @@ public class Dijkstra {
   }
 
 
-  private int[] preparedDistanceMatrix(int start) {
-    int vertexCount = provider.getGraph().vertexCount();
+  private int[] preparedDistanceMatrix(Graph graph, int start) {
+    int vertexCount = graph.vertexCount();
     int[] distances = new int[vertexCount];
     Arrays.fill(distances, Integer.MAX_VALUE);
     distances[start] = 0;
@@ -58,35 +59,4 @@ public class Dijkstra {
     return distances;
   }
 
-
-  public static void main(String[] args) throws IOException, URISyntaxException {
-    String filePath = "src/main/resources/day15-ray.txt";
-//    String filePath = "src/main/resources/day15-ray-pt2-ex.txt";
-
-    DataProvider provider = new DataProvider(filePath);
-    Dijkstra dijkstra = new Dijkstra(provider);
-    int source = 0;
-    int target = provider.getGraph().vertexCount() - 1;
-
-    long startTime = System.nanoTime();
-    int[] distances = dijkstra.calculateShortestPath(source, target);
-    long endTime = System.nanoTime();
-    long durationNS = endTime - startTime;
-    double durationMS = durationNS / 1000000.0;
-    double durationSec = durationMS / 1000.0;
-
-    final NumberFormat numberFormatter = NumberFormat.getNumberInstance();
-    numberFormatter.setGroupingUsed(true);
-    final String durationFormatted = numberFormatter.format(durationNS);
-
-    numberFormatter.setMaximumFractionDigits(5);
-    numberFormatter.setMinimumFractionDigits(5);
-    final String milliSecondsFormatted = numberFormatter.format(durationMS);
-    final String secondsFormatted = numberFormatter.format(durationSec);
-
-    System.out.println("Das Gesamtrisiko vom Start zum Ziel beträgt: " + distances[target]);
-    System.out.println("Die Berechnung dauerte " + durationFormatted
-        + " Nanosekunden (" + milliSecondsFormatted + "ms, "
-        + secondsFormatted + "s)");
-  }
 }
