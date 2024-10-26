@@ -3,12 +3,11 @@ package de.raywo.dijkstra;
 import org.apache.commons.lang3.time.StopWatch;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.text.NumberFormat;
 
 public class Main {
 
-  public static void main(String[] args) throws IOException, URISyntaxException {
+  public static void main(String[] args) throws IOException {
     StopWatch expandWatch = new StopWatch();
 
     String filePath = "src/main/resources/ray-step-2.txt";

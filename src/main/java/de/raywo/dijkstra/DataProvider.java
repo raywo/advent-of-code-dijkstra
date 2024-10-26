@@ -31,7 +31,7 @@ public class DataProvider {
 
 
   private int[][] getExpandedMatrix(int tileCount) {
-    if (!(tileCount >= 2 && tileCount <= 50)) {
+    if (!(tileCount >= 2 && tileCount <= 70)) {
       throw new IllegalArgumentException("Tile count must be between 2 and 5.");
     }
 
