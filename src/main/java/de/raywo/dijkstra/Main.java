@@ -14,14 +14,14 @@ public class Main {
 
     DataProvider provider = new DataProvider(filePath);
 
-    System.out.println("erster Teil:");
+    System.out.println("Part one:");
     doCalculation(provider.getGraph());
 
-    System.out.println("\nzweiter Teil (expandierte Matrix):");
+    System.out.println("\nPart two (expanded matrix):");
     expandWatch.start();
     final Graph expandedGraph = provider.getExpandedGraph(5);
     expandWatch.stop();
-    System.out.println("Expansion dauerte " + expandWatch.getTime() + "ms");
+    System.out.println("Expansion took " + expandWatch.getTime() + "ms.");
     doCalculation(expandedGraph);
   }
 
@@ -39,8 +39,8 @@ public class Main {
     format.setGroupingUsed(true);
     String formattedTarget = format.format(target + 1);
 
-    System.out.println("Das Gesamtrisiko vom Start (0) zum Ziel (" + formattedTarget + ") beträgt: " + distances[target]);
-    System.out.println("Die Berechnung dauerte " + calcWatch.getTime() + "ms.");
+    System.out.println("The overall risk from start (0) to end (" + formattedTarget + ") is: " + distances[target]);
+    System.out.println("The calculation took " + calcWatch.getTime() + "ms.");
   }
 
 }

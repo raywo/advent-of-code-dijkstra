@@ -3,6 +3,12 @@ package de.raywo.dijkstra;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
+/**
+ * Represents a graph structure using both an adjacency list and an
+ * adjacency matrix.
+ */
 public class Graph {
 
   private final List<List<Edge>> graph;
@@ -16,26 +22,55 @@ public class Graph {
   }
 
 
+  /**
+   * Returns the number of vertices in the graph.
+   *
+   * @return the number of vertices in the graph.
+   */
   public int vertexCount() {
     return graph.size();
   }
 
 
+  /**
+   * Returns the dimension of the graph, which is the number of vertices along one side of the adjacency matrix.
+   *
+   * @return the dimension of the graph.
+   */
   public int dimension() {
     return matrix.length;
   }
 
 
+  /**
+   * Retrieves the list of edges connected to a specific vertex in the graph.
+   *
+   * @param lineNo the index of the vertex in the graph for which the edges are
+   *               to be retrieved.
+   * @return a list of edges connected to the specified vertex.
+   */
   public List<Edge> getEdges(int lineNo) {
     return graph.get(lineNo);
   }
 
 
+  /**
+   * Retrieves the adjacency matrix representing the graph.
+   *
+   * @return a 2D array (int[][]) that represents the adjacency matrix of the graph.
+   */
   public int[][] getMatrix() {
     return matrix;
   }
 
 
+  /**
+   * Generates and returns a derived graph where each element in the adjacency
+   * matrix is incremented by 1, wrapping around to 1 if the original value is
+   * 9.
+   *
+   * @return the derived graph with updated matrix values.
+   */
   public Graph getDerivedGraph() {
     if (derivedGraph != null) return derivedGraph;
 
@@ -74,6 +109,16 @@ public class Graph {
   }
 
 
+  /**
+   * Constructs a graph representation from a given 2D matrix where each cell
+   * in the matrix represents a vertex and its edges are determined by its
+   * adjacent cells (up, down, left, right).
+   *
+   * @param matrix the 2D array (int[][]) representing the weights of the graph's edges.
+   * @return a list of lists of Edge objects representing the graph, where the
+   *         outer list corresponds to each vertex and the inner list contains
+   *         the edges from that vertex to its adjacent vertices.
+   */
   private List<List<Edge>> buildGraph(int[][] matrix) {
     int rows = matrix.length;
     int cols = matrix[0].length;
