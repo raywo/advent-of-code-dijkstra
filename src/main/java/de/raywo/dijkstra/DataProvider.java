@@ -9,6 +9,8 @@ import java.util.List;
  * DataProvider is responsible for loading and managing graph data from a file.
  * It can read a matrix from a file, create a graph from that matrix, and
  * expand the graph by a specified tile count.
+ *
+ * @author Ray Wojciechowski
  */
 public class DataProvider {
 

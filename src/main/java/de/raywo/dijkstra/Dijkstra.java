@@ -6,6 +6,8 @@ import java.util.PriorityQueue;
 /**
  * The Dijkstra class is a singleton implementation of Dijkstra's algorithm
  * for finding the shortest paths between nodes in a graph.
+ *
+ * @author Ray Wojciechowski
  */
 public class Dijkstra {
 

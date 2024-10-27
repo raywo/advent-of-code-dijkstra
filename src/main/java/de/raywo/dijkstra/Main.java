@@ -5,6 +5,15 @@ import org.apache.commons.lang3.time.StopWatch;
 import java.io.IOException;
 import java.text.NumberFormat;
 
+/**
+ * The proposed solution for 2021’s Advent of Code puzzle on day 15.
+ * <p>
+ * It first reads a graph from a file, performs a calculation on the
+ * original graph, and then performs the same calculation on an expanded
+ * version of the graph.
+ *
+ * @author Ray Wojciechowski
+ */
 public class Main {
 
   public static void main(String[] args) throws IOException {

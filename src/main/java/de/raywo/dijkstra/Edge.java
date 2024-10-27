@@ -3,6 +3,8 @@ package de.raywo.dijkstra;
 /**
  * The Edge class represents a connection between two nodes in a graph.
  * Each edge has a target node and a weight associated with it.
+ *
+ * @author Ray Wojciechowski (AI generated)
  */
 public class Edge {
   int targetNode, weight;

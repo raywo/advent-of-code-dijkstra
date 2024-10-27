@@ -4,6 +4,8 @@ package de.raywo.dijkstra;
  * Represents a node in a graph with an associated distance.
  * This class is primarily used in graph algorithms such as Dijkstra's algorithm
  * to track nodes and their distances from a starting point.
+ *
+ * @author Ray Wojciechowski (AI generated)
  */
 public class Node implements Comparable<Node> {
   int node, distance;

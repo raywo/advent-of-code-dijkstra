@@ -8,6 +8,8 @@ import java.util.List;
 /**
  * Represents a graph structure using both an adjacency list and an
  * adjacency matrix.
+ *
+ * @author Ray Wojciechowski
  */
 public class Graph {
 
@@ -16,6 +18,11 @@ public class Graph {
   private Graph derivedGraph = null;
 
 
+  /**
+   * Constructs a Graph object from a given 2D adjacency matrix.
+   *
+   * @param matrix the 2D array representing the adjacency matrix of the graph.
+   */
   public Graph(int[][] matrix) {
     this.graph = buildGraph(matrix);
     this.matrix = matrix;
@@ -57,7 +64,7 @@ public class Graph {
   /**
    * Retrieves the adjacency matrix representing the graph.
    *
-   * @return a 2D array (int[][]) that represents the adjacency matrix of the graph.
+   * @return a 2D array that represents the adjacency matrix of the graph.
    */
   public int[][] getMatrix() {
     return matrix;
